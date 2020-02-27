@@ -1,11 +1,13 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return 'Hello world'
+    userSent = request.get_json()
+    print '\tClient sent:', userSent
+    return jsonify({"received": userSent})
 
 
 if __name__ == '__main__':
