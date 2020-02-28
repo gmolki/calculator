@@ -5,12 +5,12 @@ import getopt
 
 
 def sendRequest(operation):
-    print '\tSending\t:', operation
     serverResponse = requests.post(
         url='http://127.0.0.1:5000/', json=operation)
 
     resJson = serverResponse.json()
-    print '\tResponse\t:', serverResponse.json()
+    print 'Operation:\t', operation['value1'], ' ', operation['operator'], ' ', operation['value2']
+    print 'Result:\t\t', resJson['solution'], '\n'
 
 
 def readCsv(file):
@@ -24,7 +24,7 @@ def readCsv(file):
                          'operator': row[1], 'value2': row[2]}
 
             nReq += 1
-            print 'Request no. ', nReq
+            # print 'Request no. ', nReq
             sendRequest(operation)
 
 
@@ -41,6 +41,7 @@ def main(argv):
         sys.exit(2)
 
     for opt, arg in opts:
+        # Define operations for each option
         if opt in ("-h", "--help"):
             # Help option
             print "\nUsage:\npython client.py [option] [arg]\n\nOptions and arguments:\n-h\t: print this help message and exit (also --help)\n-i\t: csv input file to read the operations and calculate them,\n\t  needed to specify the extension (also --input)\n"
