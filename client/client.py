@@ -2,6 +2,17 @@ import csv
 import requests
 import sys
 import getopt
+import logging
+
+logging.basicConfig(filename='./client_log.txt',
+                    filemode='w',
+                    format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S',
+                    level=logging.INFO)
+
+
+def log(data):
+    logging.info(data)
 
 
 def sendRequest(operation):
@@ -14,6 +25,7 @@ def sendRequest(operation):
 def calculateCsv(file):
     # Reads .csv file and sends a request for each operation to the
     # server to calculate them
+    logString = ''
     with open('sample.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         nReq = 0  # Counter of requests sent to the server
@@ -22,12 +34,18 @@ def calculateCsv(file):
             # server to get the operation result
             operation = {'value1': row[0],
                          'operator': row[1], 'value2': row[2]}
-
+            logString = 'Operation:\t' + \
+                operation['value1'] + ' ' + \
+                operation['operator'] + ' ' + operation['value2']
+            print(logString)
+            log(logString)
             nReq += 1
+
             result = sendRequest(operation)
 
-            print 'Operation:\t', operation['value1'], ' ', operation['operator'], ' ', operation['value2']
-            print 'Result:\t\t', result['solution'], '\n'
+            logString = 'Result:\t' + str(result['solution'])
+            print(logString)
+            log(logString)
 
 
 def main(argv):
