@@ -5,15 +5,15 @@ import getopt
 
 
 def sendRequest(operation):
+    # Sends request to the server and returns the json of the response
     serverResponse = requests.post(
         url='http://127.0.0.1:5000/', json=operation)
-
-    resJson = serverResponse.json()
-    print 'Operation:\t', operation['value1'], ' ', operation['operator'], ' ', operation['value2']
-    print 'Result:\t\t', resJson['solution'], '\n'
+    return serverResponse.json()
 
 
-def readCsv(file):
+def calculateCsv(file):
+    # Reads .csv file and sends a request for each operation to the
+    # server to calculate them
     with open('sample.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         nReq = 0  # Counter of requests sent to the server
@@ -24,8 +24,10 @@ def readCsv(file):
                          'operator': row[1], 'value2': row[2]}
 
             nReq += 1
-            # print 'Request no. ', nReq
-            sendRequest(operation)
+            result = sendRequest(operation)
+
+            print 'Operation:\t', operation['value1'], ' ', operation['operator'], ' ', operation['value2']
+            print 'Result:\t\t', result['solution'], '\n'
 
 
 def main(argv):
@@ -49,7 +51,7 @@ def main(argv):
         elif opt in ("-i", "--input"):
             # Input option
             print "input file\t: ", arg
-            readCsv(arg)
+            calculateCsv(arg)
 
 
 if __name__ == "__main__":
