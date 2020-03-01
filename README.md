@@ -12,8 +12,10 @@ Inside the **server** folder
 
 ### Files
 
-- server.py > Receives clients requests and operates depending the request type and the action specified by the 'action' flag in the json
-- calculator.py > Contains methods to make simple operations between two values
+- server.py 
+  > Receives clients requests and operates depending the request type and the action specified by the 'action' flag in the json
+- calculator.py
+  > Contains methods to make simple operations between two values
 
 ## Client
 
@@ -31,7 +33,11 @@ To test the methods used by the client in the server side:
 
 ### Files
 
-- client.py > Checks the flags written in CLI when executed and operates depending in this flags
-- serverConnection.py > Sends request to the server and receives its responses
-- unit_test.py > Tests the methods executed in the server side used by the client with unit tests
-- sample.csv > Csv example file with values and operators
+- client.py
+  > Checks the flags written in CLI when executed and operates depending in this flags
+- serverConnection.py
+  > Sends request to the server and receives its responses
+- unit_test.py
+  > Tests the methods executed in the server side used by the client with unit tests
+- sample.csv
+  > Csv example file with values and operators
