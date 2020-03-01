@@ -1,7 +1,7 @@
 import logging
 
 logging.basicConfig(filename='./server_log.txt',
-                    filemode='w',
+                    filemode='a',
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S',
                     level=logging.INFO)

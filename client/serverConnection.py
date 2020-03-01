@@ -7,7 +7,7 @@ class ServerConnection:
     def __init__(self, url):
         self.url = url
         logging.basicConfig(filename='./client_log.txt',
-                            filemode='w',
+                            filemode='a',
                             format='%(asctime)s - %(message)s',
                             datefmt='%d-%b-%y %H:%M:%S',
                             level=logging.INFO)
