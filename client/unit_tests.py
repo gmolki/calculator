@@ -19,9 +19,9 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_addition2(self):
-        operation = {'value1': '2',
+        operation = {'value1': '4',
                      'operator': '+',
-                     'value2': '4'}
+                     'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 6, "Should be 6")
 
@@ -37,11 +37,11 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_subtraction2(self):
-        operation = {'value1': '2',
+        operation = {'value1': '4',
                      'operator': '-',
-                     'value2': '4'}
+                     'value2': '2'}
         result = self.server.sendRequest(operation)
-        self.assertEqual(result['solution'], -2, "Should be -2")
+        self.assertEqual(result['solution'], 2, "Should be 2")
 
     # Different tests made to the multiplication operation
     # TEST 1:
@@ -55,11 +55,29 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_multiplication2(self):
-        operation = {'value1': '2',
+        operation = {'value1': '4',
                      'operator': '*',
-                     'value2': '4'}
+                     'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 8, "Should be 8")
+
+    # Different tests made to the division operation
+    # TEST 1:
+    def test_division1(self):
+
+        operation = {'value1': '1',
+                     'operator': '/',
+                     'value2': '-1'}
+        result = self.server.sendRequest(operation)
+        self.assertEqual(result['solution'], -1, "Should be -1")
+
+    # TEST 2:
+    def test_division2(self):
+        operation = {'value1': '4',
+                     'operator': '/',
+                     'value2': '2'}
+        result = self.server.sendRequest(operation)
+        self.assertEqual(result['solution'], 2, "Should be 2")
 
 
 if __name__ == '__main__':
