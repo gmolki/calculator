@@ -3,25 +3,26 @@ import logging
 
 app = Flask(__name__)
 
+logging.basicConfig(filename='./server_log.txt',
+                    filemode='w',
+                    format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S',
+                    level=logging.INFO)
+
 
 def log(data):
-    logging.basicConfig(filename='./log.txt',
-                        filemode='w',
-                        format='%(asctime)s - %(message)s',
-                        datefmt='%d-%b-%y %H:%M:%S',
-                        level=logging.INFO)
     logging.info(data)
 
 
 def calculate(value1, operator, value2):
     if (operator == "+"):
-        return value1 + value2
+        return float(value1) + float(value2)
     elif (operator == "-"):
-        return value1 - value2
+        return float(value1) - float(value2)
     elif (operator == "*"):
-        return value1 * value2
+        return float(value1) * float(value2)
     elif (operator == "/"):
-        return value1 / value2
+        return float(value1) / float(value2)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,7 +30,6 @@ def index():
     logString = ''
     if request.method == 'POST':
         userSent = request.get_json()
-        # print '\tClient sent:', userSent
         logString = 'Operation:\t ' + \
             userSent['value1'] + ' ' + userSent['operator'] + ' ' + \
             userSent['value2']
@@ -41,7 +41,7 @@ def index():
         log(logString)
         return jsonify({"sent": userSent, 'solution': solution})
     elif request.method == 'GET':
-        return '<h1>Hello<h1>'
+        return '<h1>Hello!<h1>'
 
 
 if __name__ == '__main__':
