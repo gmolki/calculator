@@ -16,13 +16,13 @@ def log(data):
 
 def calculate(value1, operator, value2):
     if (operator == "+"):
-        return float(value1) + float(value2)
+        return value1 + value2
     elif (operator == "-"):
-        return float(value1) - float(value2)
+        return value1 - value2
     elif (operator == "*"):
-        return float(value1) * float(value2)
+        return value1 * value2
     elif (operator == "/"):
-        return float(value1) / float(value2)
+        return value1 / value2
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def index():
             userSent['value2']
         log(logString)
         solution = calculate(
-            int(userSent['value1']), userSent['operator'], int(userSent['value2']))
+            float(userSent['value1']), userSent['operator'], float(userSent['value2']))
 
         logString = 'Solution:\t ' + str(solution)
         log(logString)
