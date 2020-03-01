@@ -1,28 +1,7 @@
 from flask import Flask, jsonify, request
-import logging
+import calculator
 
 app = Flask(__name__)
-
-logging.basicConfig(filename='./server_log.txt',
-                    filemode='w',
-                    format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S',
-                    level=logging.INFO)
-
-
-def log(data):
-    logging.info(data)
-
-
-def calculate(value1, operator, value2):
-    if (operator == "+"):
-        return value1 + value2
-    elif (operator == "-"):
-        return value1 - value2
-    elif (operator == "*"):
-        return value1 * value2
-    elif (operator == "/"):
-        return value1 / value2
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,16 +10,13 @@ def index():
     if request.method == 'POST':
         userSent = request.get_json()
         if userSent['action'] == 'calculate':
-            logString = 'Operation:\t ' + \
-                userSent['value1'] + ' ' + userSent['operator'] + ' ' + \
-                userSent['value2']
-            log(logString)
-            solution = calculate(
-                float(userSent['value1']), userSent['operator'], float(userSent['value2']))
 
-            logString = 'Solution:\t ' + str(solution)
-            log(logString)
-            return jsonify({"sent": userSent, 'solution': solution})
+            result = calculator.calculate(float(userSent['value1']),
+                                          userSent['operator'],
+                                          float(userSent['value2']))
+
+            return jsonify({"sent": userSent, 'solution': result})
+
     elif request.method == 'GET':
         return '<h1>Hello!<h1>'
 
