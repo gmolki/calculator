@@ -30,19 +30,20 @@ def index():
     logString = ''
     if request.method == 'POST':
         userSent = request.get_json()
-        logString = 'Operation:\t ' + \
-            userSent['value1'] + ' ' + userSent['operator'] + ' ' + \
-            userSent['value2']
-        log(logString)
-        solution = calculate(
-            float(userSent['value1']), userSent['operator'], float(userSent['value2']))
+        if userSent['action'] == 'calculate':
+            logString = 'Operation:\t ' + \
+                userSent['value1'] + ' ' + userSent['operator'] + ' ' + \
+                userSent['value2']
+            log(logString)
+            solution = calculate(
+                float(userSent['value1']), userSent['operator'], float(userSent['value2']))
 
-        logString = 'Solution:\t ' + str(solution)
-        log(logString)
-        return jsonify({"sent": userSent, 'solution': solution})
+            logString = 'Solution:\t ' + str(solution)
+            log(logString)
+            return jsonify({"sent": userSent, 'solution': solution})
     elif request.method == 'GET':
         return '<h1>Hello!<h1>'
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

@@ -31,8 +31,11 @@ class ServerConnection:
             for row in csv_reader:
                 # Reads every row of the csv file and sends the data to the
                 # server to get the operation result
-                operation = {'value1': row[0],
-                             'operator': row[1], 'value2': row[2]}
+                operation = {'action': 'calculate',
+                             'value1': row[0],
+                             'operator': row[1],
+                             'value2': row[2]}
+
                 logString = 'Operation:\t' + \
                     operation['value1'] + ' ' + \
                     operation['operator'] + ' ' + operation['value2']

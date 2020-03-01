@@ -4,14 +4,15 @@ import serverConnection as s
 
 class TestSum(unittest.TestCase):
 
+    # Set up the environment of the tests
     def setUp(self):
         self.server = s.ServerConnection('http://127.0.0.1:5000/')
 
     # Different tests made to the addition operation
     # TEST 1:
     def test_addition1(self):
-
-        operation = {'value1': '1',
+        operation = {'action': 'calculate',
+                     'value1': '1',
                      'operator': '+',
                      'value2': '1'}
         result = self.server.sendRequest(operation)
@@ -19,14 +20,17 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_addition2(self):
-        operation = {'value1': '4',
+        operation = {'action': 'calculate',
+                     'value1': '4',
                      'operator': '+',
                      'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 6, "Should be 6")
 
+    # TEST 3:
     def test_addition3(self):
-        operation = {'value1': '4.5',
+        operation = {'action': 'calculate',
+                     'value1': '4.5',
                      'operator': '+',
                      'value2': '3'}
         result = self.server.sendRequest(operation)
@@ -35,7 +39,8 @@ class TestSum(unittest.TestCase):
     # Different tests made to the subtraction operation
     # TEST 1:
     def test_subtraction1(self):
-        operation = {'value1': '1',
+        operation = {'action': 'calculate',
+                     'value1': '1',
                      'operator': '-',
                      'value2': '1'}
         result = self.server.sendRequest(operation)
@@ -43,14 +48,17 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_subtraction2(self):
-        operation = {'value1': '4',
+        operation = {'action': 'calculate',
+                     'value1': '4',
                      'operator': '-',
                      'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 2, "Should be 2")
 
+    # TEST 3:
     def test_subtraction3(self):
-        operation = {'value1': '4.5',
+        operation = {'action': 'calculate',
+                     'value1': '4.5',
                      'operator': '-',
                      'value2': '5'}
         result = self.server.sendRequest(operation)
@@ -59,7 +67,8 @@ class TestSum(unittest.TestCase):
     # Different tests made to the multiplication operation
     # TEST 1:
     def test_multiplication1(self):
-        operation = {'value1': '1',
+        operation = {'action': 'calculate',
+                     'value1': '1',
                      'operator': '*',
                      'value2': '-1'}
         result = self.server.sendRequest(operation)
@@ -67,14 +76,17 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_multiplication2(self):
-        operation = {'value1': '4',
+        operation = {'action': 'calculate',
+                     'value1': '4',
                      'operator': '*',
                      'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 8, "Should be 8")
 
+    # TEST 3:
     def test_multiplication3(self):
-        operation = {'value1': '4.5',
+        operation = {'action': 'calculate',
+                     'value1': '4.5',
                      'operator': '*',
                      'value2': '3'}
         result = self.server.sendRequest(operation)
@@ -83,7 +95,8 @@ class TestSum(unittest.TestCase):
     # Different tests made to the division operation
     # TEST 1:
     def test_division1(self):
-        operation = {'value1': '1',
+        operation = {'action': 'calculate',
+                     'value1': '1',
                      'operator': '/',
                      'value2': '-1'}
         result = self.server.sendRequest(operation)
@@ -91,14 +104,17 @@ class TestSum(unittest.TestCase):
 
     # TEST 2:
     def test_division2(self):
-        operation = {'value1': '4',
+        operation = {'action': 'calculate',
+                     'value1': '4',
                      'operator': '/',
                      'value2': '2'}
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], 2, "Should be 2")
 
+    # TEST 3:
     def test_dvision3(self):
-        operation = {'value1': '4.5',
+        operation = {'action': 'calculate',
+                     'value1': '4.5',
                      'operator': '/',
                      'value2': '3'}
         result = self.server.sendRequest(operation)
