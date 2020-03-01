@@ -43,6 +43,24 @@ class TestSum(unittest.TestCase):
         result = self.server.sendRequest(operation)
         self.assertEqual(result['solution'], -2, "Should be -2")
 
+    # Different tests made to the multiplication operation
+    # TEST 1:
+    def test_multiplication1(self):
+
+        operation = {'value1': '1',
+                     'operator': '*',
+                     'value2': '-1'}
+        result = self.server.sendRequest(operation)
+        self.assertEqual(result['solution'], -1, "Should be -1")
+
+    # TEST 2:
+    def test_multiplication2(self):
+        operation = {'value1': '2',
+                     'operator': '*',
+                     'value2': '4'}
+        result = self.server.sendRequest(operation)
+        self.assertEqual(result['solution'], 8, "Should be 8")
+
 
 if __name__ == '__main__':
     unittest.main()
